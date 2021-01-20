@@ -2,10 +2,15 @@
 Exemplo de Projeto para a Disciplina DCT1106 - Programação
 
 Universidade Federal do Rio Grande do Norte 
+
 Centro de Ensino Superior do Seridó 
+
 Departamento de Computação e Tecnologia 
+
 Disciplina DCT1106 -- Programação 
+
 Projeto Sistema de Gestão Escolar 
+
 Developed by @flgorgonio - Jan, 2021
 
 # Escola de Idiomas Língua Solta
