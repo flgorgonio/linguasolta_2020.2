@@ -1,5 +1,6 @@
 # linguasolta
 Exemplo de Projeto para a Disciplina DCT1106 - Programação
+
 Universidade Federal do Rio Grande do Norte 
 Centro de Ensino Superior do Seridó 
 Departamento de Computação e Tecnologia 
