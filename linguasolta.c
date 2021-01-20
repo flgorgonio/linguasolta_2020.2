@@ -4,7 +4,7 @@
 ///               Departamento de Computação e Tecnologia                   ///
 ///                  Disciplina DCT1106 -- Programação                      ///
 ///                  Projeto Sistema de Gestão Escolar                      ///
-///                Developed by  @flgorgonio - Sep, 2020                    ///
+///                Developed by  @flgorgonio - Jan, 2021                    ///
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -27,7 +27,7 @@ void menuSobre(void) {
     printf("///               Departamento de Computação e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
     printf("///                  Projeto Sistema de Gestão Escolar                      ///\n");
-    printf("///                Developed by  @flgorgonio - Sep, 2020                    ///\n");
+    printf("///                Developed by  @flgorgonio - Jan, 2021                    ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
