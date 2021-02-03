@@ -13,11 +13,11 @@
 /// 
 /// Assinaturas das funções
 ///
-void menuPrincipal(void);
+char menuPrincipal(void);
 void telaSobre(void);
-void menuAluno(void);
-void menuProfessor(void);
-void menuTurma(void);
+char menuAluno(void);
+char menuProfessor(void);
+char menuTurma(void);
 void telaCadastrarAluno(void);
 
 
@@ -25,17 +25,20 @@ void telaCadastrarAluno(void);
 /// Programa Principal
 ///
 int main(void) {
+	char opcao;
+
     telaSobre();
-    menuPrincipal();
-    menuAluno();
-    menuProfessor();
-    menuTurma();
+    opcao = menuPrincipal();
+    opcao = menuAluno();
+    opcao = menuProfessor();
+    opcao = menuTurma();
     telaCadastrarAluno();
     return 0;
 }
 
 
-void menuPrincipal(void) {
+char menuPrincipal(void) {
+	char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -60,13 +63,16 @@ void menuPrincipal(void) {
 	printf("///           5. Informações sobre o sistema                              ///\n");
 	printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada: ");
+	scanf("%c", &op);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+	return op;
 }
 
 
@@ -105,7 +111,8 @@ void telaSobre(void) {
 }
 
 
-void menuAluno(void) {
+char menuAluno(void) {
+	char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -129,17 +136,21 @@ void menuAluno(void) {
 	printf("///           4. Excluir um aluno do sistema                              ///\n");
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada: ");
+	scanf("%c", &op);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+	return op;
 }
 
 
-void menuProfessor(void) {
+char menuProfessor(void) {
+	char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -163,17 +174,21 @@ void menuProfessor(void) {
 	printf("///           4. Excluir um professor do sistema                          ///\n");
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada: ");
+	scanf("%c", &op);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+	return op;
 }
 
 
-void menuTurma(void) {
+char menuTurma(void) {
+	char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -197,13 +212,16 @@ void menuTurma(void) {
 	printf("///           4. Excluir uma turma do sistema                             ///\n");
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada: ");
+	scanf("%c", &op);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+	return op;
 }
 
 
