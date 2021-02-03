@@ -226,6 +226,12 @@ char menuTurma(void) {
 
 
 void telaCadastrarAluno(void) {
+	char matr[12];
+	char nome[51];
+	char email[51];
+	char nasc[11];
+	char celular[12];
+
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -243,11 +249,21 @@ void telaCadastrarAluno(void) {
 	printf("///           = = = = = = = = Cadastrar Aluno = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Matrícula:                                                  ///\n");
-	printf("///           Nome:                                                       ///\n");
-	printf("///           E-mail:                                                     ///\n");
-	printf("///           Data de Nascimento:                                         ///\n");
-	printf("///           Celular:                                                    ///\n");
+	printf("///           Matrícula (apenas números): ");
+	scanf("%[0-9]", matr);
+	getchar();
+	printf("///           Nome completo: ");
+	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
+	getchar();
+	printf("///           E-mail: ");
+	scanf("%[a-z@.]", email);
+	getchar();
+	printf("///           Data de Nascimento (dd/mm/aaaa):  ");
+	scanf("%[0-9/]", nasc);
+	getchar();
+	printf("///           Celular  (apenas números): ");
+	scanf("%[0-9]", celular);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
