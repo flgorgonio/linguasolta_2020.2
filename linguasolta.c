@@ -14,7 +14,7 @@
 /// Assinaturas das funções
 ///
 char menuPrincipal(void);
-void moduloEncerramento(void);
+void moduloInformacoes(void);
 void telaSobre(void);
 
 void moduloAluno(void);
@@ -46,13 +46,12 @@ int main(void) {
 						break;
 			case '4': 	moduloRelatorio();
 						break;
-			case '5': 	moduloEncerramento();
+			case '5': 	moduloInformacoes();
 						break;
 		} 		
 	} while (opcao != '0');
 	return 0;
 
-    // telaSobre();
     // opcao = menuPrincipal();
     // opcao = menuAluno();
     // opcao = menuProfessor();
@@ -296,3 +295,31 @@ void telaCadastrarAluno(void) {
 	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
 }
+
+
+void moduloAluno(void) {
+	// modulo em desenvolvimento
+
+}
+
+void moduloProfessor(void) {
+	// modulo em desenvolvimento
+
+}
+
+void moduloTurma(void) {
+	// modulo em desenvolvimento
+
+}
+
+void moduloRelatorio(void) {
+	// modulo em desenvolvimento
+
+}
+
+void moduloInformacoes(void) {
+	// modulo em desenvolvimento
+	telaSobre();
+
+}
+
