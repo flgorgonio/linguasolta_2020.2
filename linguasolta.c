@@ -48,8 +48,8 @@ int main(void) {
 						break;
 			case '5': 	moduloEncerramento();
 						break;
-		} while (opcao != '0');		
-	}
+		} 		
+	} while (opcao != '0');
 	return 0;
 
     // telaSobre();
