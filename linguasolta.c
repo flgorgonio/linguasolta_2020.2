@@ -14,11 +14,20 @@
 /// Assinaturas das funções
 ///
 char menuPrincipal(void);
+void moduloEncerramento(void);
 void telaSobre(void);
+
+void moduloAluno(void);
 char menuAluno(void);
-char menuProfessor(void);
-char menuTurma(void);
 void telaCadastrarAluno(void);
+
+void moduloProfessor(void);
+char menuProfessor(void);
+
+void moduloTurma(void);
+char menuTurma(void);
+
+void moduloRelatorio(void);
 
 
 ///
@@ -26,14 +35,30 @@ void telaCadastrarAluno(void);
 ///
 int main(void) {
 	char opcao;
+	do {
+		opcao = menuPrincipal();
+		switch(opcao) {
+			case '1': 	moduloAluno();
+						break;
+			case '2': 	moduloProfessor();
+						break;
+			case '3': 	moduloTurma();
+						break;
+			case '4': 	moduloRelatorio();
+						break;
+			case '5': 	moduloEncerramento();
+						break;
+		} while (opcao != '0');		
+	}
+	return 0;
 
-    telaSobre();
-    opcao = menuPrincipal();
-    opcao = menuAluno();
-    opcao = menuProfessor();
-    opcao = menuTurma();
-    telaCadastrarAluno();
-    return 0;
+    // telaSobre();
+    // opcao = menuPrincipal();
+    // opcao = menuAluno();
+    // opcao = menuProfessor();
+    // opcao = menuTurma();
+    // telaCadastrarAluno();
+    
 }
 
 
