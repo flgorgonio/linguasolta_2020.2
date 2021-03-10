@@ -126,7 +126,7 @@ void telaCadastrarProfessor(void) {
 	printf("///           Data de Nascimento (dd/mm/aaaa):  ");
 	scanf("%[0-9/]", nasc);
 	getchar();
-	printf("///           Celular  (apenas números): ");
+	printf("///           Celular  (apenas números com DDD): ");
 	scanf("%[0-9]", celular);
 	getchar();
 	printf("///                                                                       ///\n");
