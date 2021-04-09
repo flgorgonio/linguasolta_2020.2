@@ -119,7 +119,7 @@ void telaCadastrarAluno(void) {
 	    printf("///           Matrícula (apenas números): ");
         scanf("%[^\n]", matr);
 	    getchar();
-    } while (!validaMatr(matr));
+    } while (!validarMatr(matr));
 	printf("///           Nome completo: ");
 	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
 	getchar();
@@ -133,7 +133,7 @@ void telaCadastrarAluno(void) {
 	    printf("///           Celular  (apenas números com DDD): ");
 	    scanf("%[^\n]", celular);
 	    getchar();
-    } while (!validaCelular(celular));
+    } while (!validarFone(celular));
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -234,54 +234,3 @@ void telaExcluirAluno(void) {
 	delay(1);
 }
 
-
-
-///
-/// Funções de validação - serão transferidas posteriormente para o módulo util.c
-///
-
-int validaNome(char nome[]) {
-
-}
-
-
-int validaMatr(char matr[]) {
-    int tam;
-
-    tam = strlen(matr);
-    if (tam < 10 || tam > 11) {
-        return 0;
-    }
-    for (int i = 0; i < tam; i++) {
-        if (!ehDigito(matr[i])) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
-
-int validaEmail(char email[]) {
-
-}
-
-
-int validaNasc(char nasc[]) {
-
-}
-
-
-int validaCelular(char cel[]) {
-    int tam;
-
-    tam = strlen(cel);
-    if (tam != 11) {
-        return 0;
-    }
-    for (int i = 0; i < tam; i++) {
-        if (!ehDigito(cel[i])) {
-            return 0;
-        }
-    }
-    return 1;
-}
