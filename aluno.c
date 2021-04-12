@@ -8,6 +8,8 @@
 #include "aluno.h"
 #include "util.h"
 
+typedef struct aluno Aluno;
+
 void moduloAluno(void) {
 	char opcao;
 	do {
@@ -27,23 +29,55 @@ void moduloAluno(void) {
 
 
 void cadastrarAluno(void) {
+  Aluno *aln;
 	// função ainda em desenvolvimento
-	// exibe a tela apenas para testes
-	telaCadastrarAluno();
+	
+  // ler os dados do aluno com a função telaCadastrarAluno()
+  aln = telaPreencherAluno();
+
+  // gravar o registro no arquivo de alunos
+  gravarAluno(aln);
+
+  // liberar o espaço de memória da estrutura 
+  free(aln);
 }
 
 
 void pesquisarAluno(void) {
+  Aluno* aln;
+  char* matr;
 	// função ainda em desenvolvimento
-	// exibe a tela apenas para testes
-	telaPesquisarAluno();
+
+	matr = telaPesquisarAluno();
+
+  // pesquisa o aluno no arquivo
+  aln = buscarAluno(matr);
+
+  // exibe o aluno pesquisado
+  exibirAluno(aln);
+
+  free(aln); 
 }
 
 
 void atualizarAluno(void) {
+  Aluno* aln;
+  char* matr;
 	// função ainda em desenvolvimento
+
 	// exibe a tela apenas para testes
-	telaAtualizarAluno();
+	matr = telaAtualizarAluno();
+
+  // pesquisa o aluno no arquivo
+  aln = buscarAluno(matr);
+
+  if (aln == NULL) {
+    printf("\n\nAluno não encontrado!\n\n");
+  } else {
+    regravarAluno(aln, matr);
+  }
+
+
 }
 
 
@@ -56,7 +90,8 @@ void excluirAluno(void) {
 
 char menuAluno(void) {
 	char op;
-    limpaTela();
+  
+  limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -91,14 +126,10 @@ char menuAluno(void) {
 }
 
 
-void telaCadastrarAluno(void) {
-	char matr[12];
-	char nome[51];
-	char email[51];
-	char nasc[11];
-	char celular[12];
+Aluno* telaPreencherAluno(void) {
+  Aluno *aln;
 
-    limpaTela();
+  limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -115,37 +146,41 @@ void telaCadastrarAluno(void) {
 	printf("///           = = = = = = = = Cadastrar Aluno = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-    do {
-	    printf("///           Matrícula (apenas números): ");
-        scanf("%[^\n]", matr);
-	    getchar();
-    } while (!validarMatr(matr));
+  
+  aln = (Aluno*) malloc(sizeof(Aluno));
+  do {
+    printf("///           Matrícula (apenas números): ");
+    scanf("%[^\n]", aln->matr);
+    getchar();
+  } while (!validarMatr(aln->matr));
 	printf("///           Nome completo: ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
+	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", aln->nome);
 	getchar();
 	printf("///           E-mail: ");
-	scanf("%[a-z0-9@.]", email);
+	scanf("%[a-z0-9@.]", aln->email);
 	getchar();
 	printf("///           Data de Nascimento (dd/mm/aaaa):  ");
-	scanf("%[0-9/]", nasc);
+	scanf("%[0-9/]", aln->nasc);
 	getchar();
-    do {
-	    printf("///           Celular  (apenas números com DDD): ");
-	    scanf("%[^\n]", celular);
-	    getchar();
-    } while (!validarFone(celular));
+  do {
+    printf("///           Celular  (apenas números com DDD): ");
+    scanf("%[^\n]", aln->celular);
+    getchar();
+  } while (!validarFone(aln->celular));
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+  return aln;
 }
 
 
-void telaPesquisarAluno(void) {
-	char matr[12];
+char* telaPesquisarAluno(void) {
+	char* matr;
 
-    limpaTela();
+  matr = (char*) malloc(12*sizeof(char));
+  limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -170,13 +205,15 @@ void telaPesquisarAluno(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+  return matr;
 }
 
 
-void telaAtualizarAluno(void) {
-	char matr[12];
+char* telaAtualizarAluno(void) {
+	char* matr;
 
-    limpaTela();
+  matr = (char*) malloc(12*sizeof(char));
+  limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -201,13 +238,14 @@ void telaAtualizarAluno(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+  return matr;
 }
 
 
 void telaExcluirAluno(void) {
 	char matr[12];
 
-    limpaTela();
+  limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -234,3 +272,61 @@ void telaExcluirAluno(void) {
 	delay(1);
 }
 
+
+void gravarAluno(Aluno* aln) {
+  FILE* fp;
+
+  fp = fopen("alunos.dat", "ab");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  fwrite(aln, sizeof(Aluno), 1, fp);
+  fclose(fp);
+}
+
+
+Aluno* buscarAluno(char* matr) {
+  FILE* fp;
+  Aluno* aln;
+
+  aln = (Aluno*) malloc(sizeof(Aluno));
+  fp = fopen("alunos.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  while(!feof(fp)) {
+    fread(aln, sizeof(Aluno), 1, fp);
+    if (strcmp(aln->matr, matr) == 0) {
+      fclose(fp);
+      return aln;
+    }
+  }
+  fclose(fp);
+  return NULL;
+}
+
+
+void exibirAluno(Aluno* aln) {
+
+  if (aln == NULL) {
+    printf("\n= = = Aluno Inexistente = = =\n");
+  } else {
+    printf("\n= = = Aluno Cadastrado = = =\n");
+    printf("Matrícula: %s\n", aln->matr);
+    printf("Nome do aluno: %s\n", aln->nome);
+    printf("Endereço eletrônico: %s\n", aln->email);
+    printf("Data de Nasc: %s\n", aln->nasc);
+    printf("Celular: %s\n", aln->celular);
+  }
+  printf("\n\nTecle ENTER para continuar!\n\n");
+  getchar();
+}
+
+
+void regravarAluno(Aluno* al, char* matr) {
+
+}
