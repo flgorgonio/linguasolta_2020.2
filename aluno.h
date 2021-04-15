@@ -10,6 +10,7 @@ struct aluno {
   char email[51];
   char nasc[11];
   char celular[12];
+  int status;
 };
 
 void moduloAluno(void);
@@ -17,7 +18,8 @@ char menuAluno(void);
 Aluno* telaPreencherAluno(void);
 char* telaPesquisarAluno(void);
 char* telaAtualizarAluno(void);
-void telaExcluirAluno(void);
+char* telaExcluirAluno(void);
+void telaErroArquivo(void);
 void cadastrarAluno(void);
 void pesquisarAluno(void);
 void atualizarAluno(void);
@@ -26,14 +28,4 @@ void gravarAluno(Aluno*);
 void exibirAluno(Aluno*);
 Aluno* buscarAluno(char*);
 void exibirAluno(Aluno*);
-void regravarAluno(Aluno*, char*);
-
-///
-/// Funções de validação - serão transferidas posteriormente para o módulo util.c
-///
-
-int validaNome(char []);
-int validaMatr(char []);
-int validaEmail(char []);
-int validaData(char []);
-int validaCelular(char []);
+void regravarAluno(Aluno*);

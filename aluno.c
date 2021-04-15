@@ -29,69 +29,69 @@ void moduloAluno(void) {
 
 
 void cadastrarAluno(void) {
-  Aluno *aln;
-	// função ainda em desenvolvimento
-	
-  // ler os dados do aluno com a função telaCadastrarAluno()
-  aln = telaPreencherAluno();
+	Aluno *aln;
 
-  // gravar o registro no arquivo de alunos
-  gravarAluno(aln);
-
-  // liberar o espaço de memória da estrutura 
-  free(aln);
+	aln = telaPreencherAluno();
+	gravarAluno(aln);
+	free(aln);
 }
 
 
 void pesquisarAluno(void) {
-  Aluno* aln;
-  char* matr;
-	// função ainda em desenvolvimento
+	Aluno* aln;
+	char* matr;
 
 	matr = telaPesquisarAluno();
-
-  // pesquisa o aluno no arquivo
-  aln = buscarAluno(matr);
-
-  // exibe o aluno pesquisado
-  exibirAluno(aln);
-
-  free(aln); 
+	aln = buscarAluno(matr);
+	exibirAluno(aln);
+	free(aln); 
+	free(matr);
 }
 
 
 void atualizarAluno(void) {
-  Aluno* aln;
-  char* matr;
-	// função ainda em desenvolvimento
+	Aluno* aln;
+	char* matr;
 
-	// exibe a tela apenas para testes
 	matr = telaAtualizarAluno();
-
-  // pesquisa o aluno no arquivo
-  aln = buscarAluno(matr);
-
-  if (aln == NULL) {
-    printf("\n\nAluno não encontrado!\n\n");
-  } else {
-    regravarAluno(aln, matr);
-  }
-
-
+	aln = buscarAluno(matr);
+	if (aln == NULL) {
+    	printf("\n\nAluno não encontrado!\n\n");
+  	} else {
+		  aln = telaPreencherAluno();
+		  strcpy(aln->matr, matr);
+		  regravarAluno(aln);
+		  // Outra opção:
+		  // excluirAluno(matr);
+		  // gravarAluno(aln);
+		  free(aln);
+	}
+	free(matr);
 }
 
 
 void excluirAluno(void) {
-	// função ainda em desenvolvimento
-	// exibe a tela apenas para testes
-	telaExcluirAluno();
+	Aluno* aln;
+	char *matr;
+
+	matr = telaExcluirAluno();
+	aln = (Aluno*) malloc(sizeof(Aluno));
+	aln = buscarAluno(matr);
+	if (aln == NULL) {
+    	printf("\n\nAluno não encontrado!\n\n");
+  	} else {
+		  aln->status = False;
+		  regravarAluno(aln);
+		  free(aln);
+	}
+	free(matr);
 }
 
 
 char menuAluno(void) {
 	char op;
-  
-  limpaTela();
+	
+	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -125,11 +125,39 @@ char menuAluno(void) {
 	return op;
 }
 
+void telaErroArquivo(void) {
+	limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = =  Ops! Ocorreu em erro = = = = = =             ///\n");
+	printf("///           = = =  Não foi possível acessar o arquivo = = =             ///\n");
+	printf("///           = = = = com informações sobre os alunos = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = =  Pedimos desculpas pelos inconvenientes = =             ///\n");
+	printf("///           = = =  mas este programa será finalizado! = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("\n\nTecle ENTER para continuar!\n\n");
+	getchar();
+	exit(1);
+}
+
 
 Aluno* telaPreencherAluno(void) {
-  Aluno *aln;
+	Aluno *aln;
 
-  limpaTela();
+	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -147,12 +175,12 @@ Aluno* telaPreencherAluno(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
   
-  aln = (Aluno*) malloc(sizeof(Aluno));
-  do {
-    printf("///           Matrícula (apenas números): ");
-    scanf("%[^\n]", aln->matr);
-    getchar();
-  } while (!validarMatr(aln->matr));
+	aln = (Aluno*) malloc(sizeof(Aluno));
+	do {
+		printf("///           Matrícula (apenas números): ");
+		scanf("%[^\n]", aln->matr);
+		getchar();
+	} while (!validarMatr(aln->matr));
 	printf("///           Nome completo: ");
 	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", aln->nome);
 	getchar();
@@ -162,25 +190,26 @@ Aluno* telaPreencherAluno(void) {
 	printf("///           Data de Nascimento (dd/mm/aaaa):  ");
 	scanf("%[0-9/]", aln->nasc);
 	getchar();
-  do {
-    printf("///           Celular  (apenas números com DDD): ");
-    scanf("%[^\n]", aln->celular);
-    getchar();
-  } while (!validarFone(aln->celular));
+	do {
+		printf("///           Celular  (apenas números com DDD): ");
+		scanf("%[^\n]", aln->celular);
+		getchar();
+	} while (!validarFone(aln->celular));
+	aln->status = True;
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
-  return aln;
+  	return aln;
 }
 
 
 char* telaPesquisarAluno(void) {
 	char* matr;
 
-  matr = (char*) malloc(12*sizeof(char));
-  limpaTela();
+	matr = (char*) malloc(12*sizeof(char));
+	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -205,15 +234,15 @@ char* telaPesquisarAluno(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
-  return matr;
+  	return matr;
 }
 
 
 char* telaAtualizarAluno(void) {
 	char* matr;
 
-  matr = (char*) malloc(12*sizeof(char));
-  limpaTela();
+	matr = (char*) malloc(12*sizeof(char));
+	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -238,14 +267,15 @@ char* telaAtualizarAluno(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
-  return matr;
+  	return matr;
 }
 
 
-void telaExcluirAluno(void) {
-	char matr[12];
+char* telaExcluirAluno(void) {
+	char *matr;
 
-  limpaTela();
+	matr = (char*) malloc(12*sizeof(char));
+  	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -270,63 +300,81 @@ void telaExcluirAluno(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+	return matr;
 }
 
 
 void gravarAluno(Aluno* aln) {
-  FILE* fp;
+	FILE* fp;
 
-  fp = fopen("alunos.dat", "ab");
-  if (fp == NULL) {
-    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
-    printf("Não é possível continuar este programa...\n");
-    exit(1);
-  }
-  fwrite(aln, sizeof(Aluno), 1, fp);
-  fclose(fp);
+	fp = fopen("alunos.dat", "ab");
+	if (fp == NULL) {
+		telaErroArquivo();
+	}
+	fwrite(aln, sizeof(Aluno), 1, fp);
+	fclose(fp);
 }
 
 
 Aluno* buscarAluno(char* matr) {
-  FILE* fp;
-  Aluno* aln;
+	FILE* fp;
+	Aluno* aln;
 
-  aln = (Aluno*) malloc(sizeof(Aluno));
-  fp = fopen("alunos.dat", "rb");
-  if (fp == NULL) {
-    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
-    printf("Não é possível continuar este programa...\n");
-    exit(1);
-  }
-  while(!feof(fp)) {
-    fread(aln, sizeof(Aluno), 1, fp);
-    if (strcmp(aln->matr, matr) == 0) {
-      fclose(fp);
-      return aln;
-    }
-  }
-  fclose(fp);
-  return NULL;
+	aln = (Aluno*) malloc(sizeof(Aluno));
+	fp = fopen("alunos.dat", "rb");
+	if (fp == NULL) {
+		telaErroArquivo();
+	}
+	while(fread(aln, sizeof(Aluno), 1, fp)) {
+		if ((strcmp(aln->matr, matr) == 0) && (aln->status == True)) {
+			fclose(fp);
+			return aln;
+		}
+	}
+	fclose(fp);
+	return NULL;
 }
 
 
 void exibirAluno(Aluno* aln) {
 
-  if (aln == NULL) {
-    printf("\n= = = Aluno Inexistente = = =\n");
-  } else {
-    printf("\n= = = Aluno Cadastrado = = =\n");
-    printf("Matrícula: %s\n", aln->matr);
-    printf("Nome do aluno: %s\n", aln->nome);
-    printf("Endereço eletrônico: %s\n", aln->email);
-    printf("Data de Nasc: %s\n", aln->nasc);
-    printf("Celular: %s\n", aln->celular);
-  }
-  printf("\n\nTecle ENTER para continuar!\n\n");
-  getchar();
+	if (aln == NULL) {
+		printf("\n= = = Aluno Inexistente = = =\n");
+	} else {
+		printf("\n= = = Aluno Cadastrado = = =\n");
+		printf("Matrícula: %s\n", aln->matr);
+		printf("Nome do aluno: %s\n", aln->nome);
+		printf("Endereço eletrônico: %s\n", aln->email);
+		printf("Data de Nasc: %s\n", aln->nasc);
+		printf("Celular: %s\n", aln->celular);
+		printf("Status: %d\n", aln->status);
+	}
+	printf("\n\nTecle ENTER para continuar!\n\n");
+	getchar();
 }
 
 
-void regravarAluno(Aluno* al, char* matr) {
+void regravarAluno(Aluno* aln) {
+	int achou;
+	FILE* fp;
+	Aluno* alnLido;
 
+	alnLido = (Aluno*) malloc(sizeof(Aluno));
+	fp = fopen("alunos.dat", "r+b");
+	if (fp == NULL) {
+		telaErroArquivo();
+	}
+	// while(!feof(fp)) {
+	achou = False;
+	while(fread(alnLido, sizeof(Aluno), 1, fp) && !achou) {
+		//fread(alnLido, sizeof(Aluno), 1, fp);
+		if (strcmp(alnLido->matr, aln->matr) == 0) {
+			achou = True;
+			fseek(fp, -1*sizeof(Aluno), SEEK_CUR);
+        	fwrite(aln, sizeof(Aluno), 1, fp);
+			//break;
+		}
+	}
+	fclose(fp);
+	free(alnLido);
 }
