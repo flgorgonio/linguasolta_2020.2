@@ -10,7 +10,12 @@ void turmasPorProfessor(void);
 void turmasPorSemestre(void);
 void turmasPorHorario(void);
 
-void telaAlunosPorTurma(void);
-void telaTurmasPorProfessor(void);
-void telaTurmasPorSemestre(void);
-void telaTurmasPorHorario(void);
+char* telaAlunosPorTurma(void);
+char* telaTurmasPorProfessor(void);
+char* telaTurmasPorSemestre(void);
+char* telaTurmasPorHorario(void);
+
+void relatAlunosPorTurma(char*);
+void relatTurmasPorProfessor(char*);
+void relatTurmasPorSemestre(char*);
+void relatTurmasPorHorario(char*);

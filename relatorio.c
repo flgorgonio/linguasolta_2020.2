@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "relatorio.h"
 #include "util.h"
 
@@ -26,30 +27,54 @@ void moduloRelatorio(void) {
 
 
 void alunosPorTurma(void) {
+
 	// função ainda em desenvolvimento
 	// exibe a tela apenas para testes
-	telaAlunosPorTurma();
+
+    char* codTurma;
+
+	codTurma = telaAlunosPorTurma();
+    relatAlunosPorTurma(codTurma);
+    free(codTurma);
 }
 
 
 void turmasPorProfessor(void) {
+    
 	// função ainda em desenvolvimento
 	// exibe a tela apenas para testes
-	telaTurmasPorProfessor();
+
+    char* cpfProf;
+
+	cpfProf = telaTurmasPorProfessor();
+    relatTurmasPorProfessor(cpfProf);
+    free(cpfProf);
 }
 
 
 void turmasPorSemestre(void) {
+
 	// função ainda em desenvolvimento
 	// exibe a tela apenas para testes
-	telaTurmasPorSemestre();
+
+    char* semestre;
+
+	semestre = telaTurmasPorSemestre();
+    relatTurmasPorSemestre(semestre);
+    free(semestre);
 }
 
 
 void turmasPorHorario(void) {
+
 	// função ainda em desenvolvimento
 	// exibe a tela apenas para testes
-	telaTurmasPorHorario();
+	
+    char* horario;
+
+    horario = telaTurmasPorHorario();
+    relatTurmasPorHorario(horario);
+    free(horario);
 }
 
 
@@ -90,9 +115,10 @@ char menuRelatorio(void) {
 }
 
 
-void telaAlunosPorTurma(void) {
-	char codTurma[4];
+char* telaAlunosPorTurma(void) {
+    char* codTurma;
 
+    codTurma = (char*) malloc(4*sizeof(char));
     limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -118,11 +144,14 @@ void telaAlunosPorTurma(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+    return codTurma;
 }
 
 
-void telaTurmasPorProfessor(void) {
-	char cpf[12];
+char* telaTurmasPorProfessor(void) {
+	char *cpf;
+
+    cpf = (char*) malloc(4*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -149,11 +178,14 @@ void telaTurmasPorProfessor(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+    return cpf;
 }
 
 
-void telaTurmasPorSemestre(void) {
-	char semestre[7];
+char* telaTurmasPorSemestre(void) {
+	char* semestre;
+
+    semestre = (char*) malloc(4*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -180,11 +212,14 @@ void telaTurmasPorSemestre(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+    return semestre;
 }
 
 
-void telaTurmasPorHorario(void) {
-	char horario[11];
+char* telaTurmasPorHorario(void) {
+	char* horario;
+
+    horario = (char*) malloc(4*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -211,5 +246,89 @@ void telaTurmasPorHorario(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+    return horario;
 }
+
+
+void relatAlunosPorTurma(char* codTurma) {
+    limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = =  Código da Turma: %4s  = = = = =             ///\n", codTurma);
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+    printf("///           ===============================================             ///\n");
+	printf("///           ||  Matrícula  ||        Nome do Aluno       ||             ///\n");
+    printf("///           ===============================================             ///\n");
+    printf("///           || 12345678901 || Astrogildo de Araújo Alves ||             ///\n");
+    printf("///           || 23456789012 || Benoclécio Barbosa Bastos  ||             ///\n");
+    printf("///           || 34567890123 || Clecionilda Cardoso Castro ||             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("///           Tecle <ENTER> para continuar...                             ///");
+    getchar();
+}
+
+
+void relatTurmasPorProfessor(char* cpfProf) {
+    char *nomeProf;
+    // posteriormente, esta função irá buscar o nome do Professor no arquivo 
+    // por enquanto, o nome será preenchido com um valor predefinido
+    nomeProf = (char*) malloc(10*sizeof(char));
+    strcpy(nomeProf,"Girafales");
+
+    limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = =  Professor: %12s \n", nomeProf);
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+    printf("///           ===============================================             ///\n");
+	printf("///           ||  Cod Turma  ||        Nome da Turma       ||             ///\n");
+    printf("///           ===============================================             ///\n");
+    printf("///           ||     T09     || Francês Instrumental I     ||             ///\n");
+    printf("///           ||     T16     || Inglês para Negócios  II   ||             ///\n");
+    printf("///           ||     T42     || Inglês para Negócios III   ||             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("///           Tecle <ENTER> para continuar...                             ///");
+    getchar();
+}
+
+
+void relatTurmasPorSemestre(char* semestre) {
+    // em desenvolvimento
+}
+
+
+void relatTurmasPorHorario(char* horario) {
+    // em desenvolvimento
+}
+
 
