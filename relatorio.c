@@ -323,12 +323,68 @@ void relatTurmasPorProfessor(char* cpfProf) {
 
 
 void relatTurmasPorSemestre(char* semestre) {
-    // em desenvolvimento
+    limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = =  Semestre: %7s  = = = = = = =             ///\n", semestre);
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+    printf("///           ===============================================             ///\n");
+	printf("///           ||  Cod Turma  ||        Nome da Turma       ||             ///\n");
+    printf("///           ===============================================             ///\n");
+    printf("///           ||     T09     || Francês Instrumental I     ||             ///\n");
+    printf("///           ||     T16     || Inglês para Negócios  II   ||             ///\n");
+    printf("///           ||     T42     || Inglês para Negócios III   ||             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("///           Tecle <ENTER> para continuar...                             ///");
+    getchar();
 }
 
 
 void relatTurmasPorHorario(char* horario) {
-    // em desenvolvimento
+    limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = =  Horário: %11s  = = = = =             ///\n", horario);
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+    printf("///           ===============================================             ///\n");
+	printf("///           ||  Cod Turma  ||        Nome da Turma       ||             ///\n");
+    printf("///           ===============================================             ///\n");
+    printf("///           ||     T09     || Francês Instrumental I     ||             ///\n");
+    printf("///           ||     T16     || Inglês para Negócios  II   ||             ///\n");
+    printf("///           ||     T42     || Inglês para Negócios III   ||             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("///           Tecle <ENTER> para continuar...                             ///");
+    getchar();
 }
 
 
