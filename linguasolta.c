@@ -14,6 +14,7 @@
 #include "professor.h"
 #include "turma.h"
 #include "util.h"
+#include "relatorio.h"
 
 /////////////////////////////////////////////////////////////////////////////// 
 /// 						Assinaturas das funções
@@ -125,12 +126,6 @@ void telaSobre(void) {
 	printf("\n");
 	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
-}
-
-
-void moduloRelatorio(void) {
-	// modulo em desenvolvimento
-
 }
 
 

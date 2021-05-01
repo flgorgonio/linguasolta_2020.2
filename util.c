@@ -24,7 +24,7 @@ void delay(int segundos) {
 ///
 void limpaTela(void) {
   if (system("clear") || system("cls")) {
-
+    // limpa a tela, Linux, Mac e Windows
   }
 }
 
@@ -114,6 +114,7 @@ int validarNome(char* nome) {
 /// retorna 0 caso contrário
 ///
 int validarEmail(char* email) {
+  // Ainda não implementada
 	return 1;
 }
 
