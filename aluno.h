@@ -15,17 +15,20 @@ struct aluno {
 
 void moduloAluno(void);
 char menuAluno(void);
+
 Aluno* telaPreencherAluno(void);
 char* telaPesquisarAluno(void);
 char* telaAtualizarAluno(void);
 char* telaExcluirAluno(void);
 void telaErroArquivo(void);
+
 void cadastrarAluno(void);
 void pesquisarAluno(void);
 void atualizarAluno(void);
 void excluirAluno(void);
 void gravarAluno(Aluno*);
 void exibirAluno(Aluno*);
+
 Aluno* buscarAluno(char*);
 void exibirAluno(Aluno*);
 void regravarAluno(Aluno*);

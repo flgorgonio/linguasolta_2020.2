@@ -7,6 +7,8 @@
 #include "professor.h"
 #include "util.h"
 
+typedef struct professor Professor;
+
 void moduloProfessor(void) {
 	char opcao;
 	do {
