@@ -31,7 +31,7 @@ void moduloAluno(void) {
 void cadastrarAluno(void) {
 	Aluno *aln;
 
-	aln = telaPreencherAluno();
+	aln = telaCadastrarAluno();
 	gravarAluno(aln);
 	free(aln);
 }
@@ -58,7 +58,7 @@ void atualizarAluno(void) {
 	if (aln == NULL) {
     	printf("\n\nAluno não encontrado!\n\n");
   	} else {
-		  aln = telaPreencherAluno();
+		  aln = telaCadastrarAluno();
 		  strcpy(aln->matr, matr);
 		  regravarAluno(aln);
 		  // Outra opção:
@@ -125,7 +125,7 @@ char menuAluno(void) {
 	return op;
 }
 
-void telaErroArquivo(void) {
+void telaErroArquivoAluno(void) {
 	limpaTela();
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -154,8 +154,9 @@ void telaErroArquivo(void) {
 }
 
 
-Aluno* telaPreencherAluno(void) {
+Aluno* telaCadastrarAluno(void) {
 	Aluno *aln;
+	aln = (Aluno*) malloc(sizeof(Aluno));
 
 	limpaTela();
 	printf("\n");
@@ -174,8 +175,6 @@ Aluno* telaPreencherAluno(void) {
 	printf("///           = = = = = = = = Cadastrar Aluno = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-  
-	aln = (Aluno*) malloc(sizeof(Aluno));
 	do {
 		printf("///           Matrícula (apenas números): ");
 		scanf("%[^\n]", aln->matr);
@@ -309,7 +308,7 @@ void gravarAluno(Aluno* aln) {
 
 	fp = fopen("alunos.dat", "ab");
 	if (fp == NULL) {
-		telaErroArquivo();
+		telaErroArquivoAluno();
 	}
 	fwrite(aln, sizeof(Aluno), 1, fp);
 	fclose(fp);
@@ -323,7 +322,7 @@ Aluno* buscarAluno(char* matr) {
 	aln = (Aluno*) malloc(sizeof(Aluno));
 	fp = fopen("alunos.dat", "rb");
 	if (fp == NULL) {
-		telaErroArquivo();
+		telaErroArquivoAluno();
 	}
 	while(fread(aln, sizeof(Aluno), 1, fp)) {
 		if ((strcmp(aln->matr, matr) == 0) && (aln->status == True)) {
@@ -362,7 +361,7 @@ void regravarAluno(Aluno* aln) {
 	alnLido = (Aluno*) malloc(sizeof(Aluno));
 	fp = fopen("alunos.dat", "r+b");
 	if (fp == NULL) {
-		telaErroArquivo();
+		telaErroArquivoAluno();
 	}
 	// while(!feof(fp)) {
 	achou = False;

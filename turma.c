@@ -26,9 +26,11 @@ void moduloTurma(void) {
 
 
 void cadastrarTurma(void) {
-	// função ainda em desenvolvimento
-	// exibe a tela apenas para testes
-	telaCadastrarTurma();
+	Turma* trm;
+
+	trm = telaCadastrarTurma();
+	gravarTurma(trm);
+	free(trm);
 }
 
 
@@ -91,13 +93,38 @@ char menuTurma(void) {
 }
 
 
-void telaCadastrarTurma(void) {
-	char codTurma[4];
-	char nomeTurma[51];
-	char horario[11];
-	char cpfProf[12];
-	char semestre[7];
-	char sala[11];
+void telaErroArquivoTurma(void) {
+	limpaTela();
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =   Escola de Idiomas Língua Solta    = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @flgorgonio - Jan, 2021                  ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = =  Ops! Ocorreu em erro = = = = = =             ///\n");
+	printf("///           = = =  Não foi possível acessar o arquivo = = =             ///\n");
+	printf("///           = = = = com informações sobre as turmas = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = =  Pedimos desculpas pelos inconvenientes = =             ///\n");
+	printf("///           = = =  mas este programa será finalizado! = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("\n\nTecle ENTER para continuar!\n\n");
+	getchar();
+	exit(1);
+}
+
+
+Turma* telaCadastrarTurma(void) {
+	Turma* trm;
+	trm = (Turma*) malloc(sizeof(Turma));
 
     limpaTela();
 	printf("\n");
@@ -117,28 +144,29 @@ void telaCadastrarTurma(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Nome da turma (Ex. Francês Básico 1): ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", nomeTurma);
+	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", trm->nomeTurma);
 	getchar();
 	printf("///           Código da turma (Ex. T01, T02): ");
-	scanf("%[A-Za-z0-9]", codTurma);
+	scanf("%[A-Za-z0-9]", trm->codTurma);
 	getchar();
 	printf("///           Semestre (Ex. 2020.1): ");
-	scanf("%[0-9.]", semestre);
+	scanf("%[0-9.]", trm->semestre);
 	getchar();
 	printf("///           Horário (Ex. 35M12): ");
-	scanf("%[A-Za-z0-9]", horario);
+	scanf("%[A-Za-z0-9]", trm->horario);
 	getchar();
 	printf("///           CPF do professor (apenas números):  ");
-	scanf("%[0-9]", cpfProf);
+	scanf("%[0-9]", trm->cpfProf);
 	getchar();
 	printf("///           Local das aulas (Ex. Sala F1): ");
-	scanf("%[A-Za-z 0-9]", sala);
+	scanf("%[A-Za-z 0-9]", trm->sala);
 	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
 	delay(1);
+	return trm;
 }
 
 
@@ -282,3 +310,14 @@ void telaExcluirTurma(void) {
 	delay(1);
 }
 
+
+void gravarTurma(Turma* trm) {
+	FILE* fp;
+
+	fp = fopen("turma.dat", "ab");
+	if (fp == NULL) {
+		telaErroArquivoTurma();
+	}
+	fwrite(trm, sizeof(Turma), 1, fp);
+	fclose(fp);
+}

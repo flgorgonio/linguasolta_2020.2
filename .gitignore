@@ -1,4 +1,6 @@
 
 *.exe
 *.o
+*.gch
+*.dat
 ls

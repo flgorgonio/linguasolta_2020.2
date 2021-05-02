@@ -16,7 +16,7 @@ struct aluno {
 void moduloAluno(void);
 char menuAluno(void);
 
-Aluno* telaPreencherAluno(void);
+Aluno* telaCadastrarAluno(void);
 char* telaPesquisarAluno(void);
 char* telaAtualizarAluno(void);
 char* telaExcluirAluno(void);
