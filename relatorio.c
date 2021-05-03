@@ -220,7 +220,7 @@ char* telaTurmasPorSemestre(void) {
 char* telaTurmasPorHorario(void) {
 	char* horario;
 
-    horario = (char*) malloc(4*sizeof(char));
+    horario = (char*) malloc(11*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -380,9 +380,6 @@ void listaTurmasPorSemestre(char* semestre) {
 
 void relatTurmasPorHorario(char* horario) {
     limpaTela();
-    //
-    // Relatório fictício, para fins ilustrativos
-	//
     printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -402,9 +399,7 @@ void relatTurmasPorHorario(char* horario) {
     printf("///           ===============================================             ///\n");
 	printf("///           ||  Cod Turma  ||        Nome da Turma       ||             ///\n");
     printf("///           ===============================================             ///\n");
-    printf("///           ||     T09     || Francês Instrumental I     ||             ///\n");
-    printf("///           ||     T16     || Inglês para Negócios  II   ||             ///\n");
-    printf("///           ||     T42     || Inglês para Negócios III   ||             ///\n");
+    listaTurmasPorHorario(horario);
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -414,3 +409,25 @@ void relatTurmasPorHorario(char* horario) {
 }
 
 
+void listaTurmasPorHorario(char* horario) {
+    FILE* fp;
+    Turma* trm;
+    char nomeTrunc[26];
+    int tam;
+
+    trm = (Turma*) malloc(sizeof(Turma));
+    fp = fopen("turma.dat", "rb");
+    while (fread(trm, sizeof(Turma), 1, fp)) {
+        if (strcmp(trm->horario, horario) == 0) {
+            tam = strlen(trm->nomeTurma);
+            strncpy(nomeTrunc, trm->nomeTurma, tam);
+            for (int i = tam; i < 25; i++) {
+                nomeTrunc[i] = ' ';
+            }
+            nomeTrunc[25] = '\0';
+            printf("///           ||     %-3s     || %-26s ||             ///\n", trm->codTurma, nomeTrunc);
+        }
+    }
+    fclose(fp);
+    free(trm);
+}

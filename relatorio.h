@@ -21,3 +21,4 @@ void relatTurmasPorSemestre(char*);
 void relatTurmasPorHorario(char*);
 
 void listaTurmasPorSemestre(char*);
+void listaTurmasPorHorario(char*);
