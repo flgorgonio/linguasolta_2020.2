@@ -19,3 +19,5 @@ void relatAlunosPorTurma(char*);
 void relatTurmasPorProfessor(char*);
 void relatTurmasPorSemestre(char*);
 void relatTurmasPorHorario(char*);
+
+void listaTurmasPorSemestre(char*);

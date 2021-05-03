@@ -7,6 +7,7 @@
 #include <string.h>
 #include "relatorio.h"
 #include "util.h"
+#include "turma.h"
 
 void moduloRelatorio(void) {
 	char opcao;
@@ -185,7 +186,7 @@ char* telaTurmasPorProfessor(void) {
 char* telaTurmasPorSemestre(void) {
 	char* semestre;
 
-    semestre = (char*) malloc(4*sizeof(char));
+    semestre = (char*) malloc(7*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -265,7 +266,7 @@ void relatAlunosPorTurma(char* codTurma) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = =  Código da Turma: %4s  = = = = =             ///\n", codTurma);
+	printf("///           = = = = = = =  Código da Turma: %-3s  = = = = =             ///\n", codTurma);
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
     printf("///           ===============================================             ///\n");
@@ -343,9 +344,7 @@ void relatTurmasPorSemestre(char* semestre) {
     printf("///           ===============================================             ///\n");
 	printf("///           ||  Cod Turma  ||        Nome da Turma       ||             ///\n");
     printf("///           ===============================================             ///\n");
-    printf("///           ||     T09     || Francês Instrumental I     ||             ///\n");
-    printf("///           ||     T16     || Inglês para Negócios  II   ||             ///\n");
-    printf("///           ||     T42     || Inglês para Negócios III   ||             ///\n");
+    listaTurmasPorSemestre(semestre);
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -355,9 +354,36 @@ void relatTurmasPorSemestre(char* semestre) {
 }
 
 
+void listaTurmasPorSemestre(char* semestre) {
+    FILE* fp;
+    Turma* trm;
+    char nomeTrunc[26];
+    int tam;
+
+    trm = (Turma*) malloc(sizeof(Turma));
+    fp = fopen("turma.dat", "rb");
+    while (fread(trm, sizeof(Turma), 1, fp)) {
+        if (strcmp(trm->semestre, semestre) == 0) {
+            tam = strlen(trm->nomeTurma);
+            strncpy(nomeTrunc, trm->nomeTurma, tam);
+            for (int i = tam; i < 25; i++) {
+                nomeTrunc[i] = ' ';
+            }
+            nomeTrunc[25] = '\0';
+            printf("///           ||     %-3s     || %-26s ||             ///\n", trm->codTurma, nomeTrunc);
+        }
+    }
+    fclose(fp);
+    free(trm);
+}
+
+
 void relatTurmasPorHorario(char* horario) {
     limpaTela();
-	printf("\n");
+    //
+    // Relatório fictício, para fins ilustrativos
+	//
+    printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///          ===================================================          ///\n");
