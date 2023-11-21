@@ -8,6 +8,7 @@
 #include "relatorio.h"
 #include "util.h"
 #include "turma.h"
+#include "professor.h"
 
 void moduloRelatorio(void) {
 	char opcao;
@@ -152,7 +153,7 @@ char* telaAlunosPorTurma(void) {
 char* telaTurmasPorProfessor(void) {
 	char *cpf;
 
-    cpf = (char*) malloc(4*sizeof(char));
+    cpf = (char*) malloc(12*sizeof(char));
 
     limpaTela();
 	printf("\n");
@@ -285,11 +286,9 @@ void relatAlunosPorTurma(char* codTurma) {
 
 
 void relatTurmasPorProfessor(char* cpfProf) {
-    char *nomeProf;
-    // posteriormente, esta função irá buscar o nome do Professor no arquivo 
-    // por enquanto, o nome será preenchido com um valor predefinido
-    nomeProf = (char*) malloc(10*sizeof(char));
-    strcpy(nomeProf,"Girafales");
+    char* nomeProf;
+
+    nomeProf = getNomeProfessor(cpfProf);
 
     limpaTela();
 	printf("\n");
@@ -320,6 +319,7 @@ void relatTurmasPorProfessor(char* cpfProf) {
 	printf("\n");
     printf("///           Tecle <ENTER> para continuar...                             ///");
     getchar();
+    free(nomeProf);
 }
 
 
@@ -431,3 +431,50 @@ void listaTurmasPorHorario(char* horario) {
     fclose(fp);
     free(trm);
 }
+
+
+char* getNomeProfessor(char* cpfProf) {
+	char *nomeProf;
+	Professor* prf;
+	
+	nomeProf = (char*) malloc(51*sizeof(char));
+	prf = (Professor*) malloc(sizeof(Professor));
+	prf = buscarProfessor(cpfProf);
+    if (prf == NULL) {
+    	strcpy(nomeProf, "");
+    } else {
+    	strcpy(nomeProf, prf->nome);
+    }
+    
+	return nomeProf;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

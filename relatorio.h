@@ -22,3 +22,5 @@ void relatTurmasPorHorario(char*);
 
 void listaTurmasPorSemestre(char*);
 void listaTurmasPorHorario(char*);
+
+char* getNomeProfessor(char*);
